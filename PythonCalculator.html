@@ -23,6 +23,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: move;
         }
 
         .calculator h2 {
@@ -84,8 +89,8 @@
         }
     </style>
 </head>
-<body onload="brython()">
-    <div class="calculator">
+<body>
+    <div class="calculator" draggable="true" ondragstart="drag(event)">
         <h2>Calculator</h2>
         <input type="text" id="result" readonly>
         <div class="row">
@@ -138,6 +143,22 @@
         def calculate():
             result = eval(document["result"].value)
             document["result"].value = result
-    </script>
+
+    def drag(ev):
+        ev.dataTransfer.setData("text", ev.target.id)
+
+    document.addEventListener("dragstart", drag)
+
+    def drop(ev):
+        ev.preventDefault()
+        data = ev.dataTransfer.getData("text")
+        ev.target.appendChild(document.getElementById(data))
+
+    def allowDrop(ev):
+        ev.preventDefault()
+
+    document.addEventListener("dragover", allowDrop)
+    document.addEventListener("drop", drop)
+</script>
 </body>
 </html>
