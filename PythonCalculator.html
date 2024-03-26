@@ -22,7 +22,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            width: 300px;
+            width: 240px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -39,7 +39,7 @@
         }
 
         .calculator input[type="text"] {
-            width: 100%;
+            width: calc(100% - 10px);
             padding: 10px;
             font-size: 20px;
             text-align: right;
@@ -57,9 +57,9 @@
 
         .calculator .row button {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             font-size: 20px;
-            border: none;
+            border: 1px solid #000;
             cursor: pointer;
             color: #fff;
             background-color: #666;
@@ -95,9 +95,8 @@
         <h2>Calculator</h2>
         <input type="text" id="result" readonly>
         <div class="row">
-            <button onclick="clear_entry()">CE</button>
             <button onclick="clear()">C</button>
-            <button onclick="delete_last()"><-</button>
+            <button onclick="delete_last()">Delete</button>
             <button onclick="append_to_result('/')">/</button>
         </div>
         <div class="row">
@@ -134,10 +133,6 @@
         def clear():
             document["result"].value = ''
 
-        def clear_entry():
-            value = document["result"].value
-            document["result"].value = value[:-1]
-
         def delete_last():
             value = document["result"].value
             document["result"].value = value[:-1]
@@ -164,6 +159,11 @@
 
         document.addEventListener("dragover", allowDrop)
         document.addEventListener("drop", drop)
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            brython();
+        }
     </script>
 </body>
 </html>
