@@ -91,7 +91,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
 </head>
 <body>
-    <div class="calculator" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+    <div class="calculator" draggable="true" ondragstart="drag(event)">
         <h2>Calculator</h2>
         <input type="text" id="result" readonly>
         <div class="row">
@@ -128,14 +128,17 @@
         from browser import document
 
         def append_to_result(value):
-            document["result"].value += value
+            result = document["result"].value
+            if result == "Error":
+                result = ""
+            document["result"].value = result + value
 
         def clear():
             document["result"].value = ''
 
         def delete_last():
-            value = document["result"].value
-            document["result"].value = value[:-1]
+            result = document["result"].value
+            document["result"].value = result[:-1] if len(result) > 0 else ''
 
         def calculate():
             try:
@@ -144,19 +147,20 @@
             except:
                 document["result"].value = "Error"
 
-        def dragStart(ev):
-            ev.dataTransfer.setData("text/plain", ev.target.id)
+        def drag(ev):
+            ev.dataTransfer.setData("text", ev.target.id)
 
-        def dragOver(ev):
-            ev.preventDefault()
+        document.addEventListener("dragstart", drag)
 
         def drop(ev):
             ev.preventDefault()
-            data = ev.dataTransfer.getData("text/plain")
+            data = ev.dataTransfer.getData("text")
             ev.target.appendChild(document.getElementById(data))
 
-        document.addEventListener("dragstart", dragStart)
-        document.addEventListener("dragover", dragOver)
+        def allowDrop(ev):
+            ev.preventDefault()
+
+        document.addEventListener("dragover", allowDrop)
         document.addEventListener("drop", drop)
     </script>
     <script type="text/javascript">
