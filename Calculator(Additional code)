@@ -1,0 +1,82 @@
+Addition
+def add(user_numbers):
+  return(f"The answer is {sum(user_numbers)}")
+
+user_numbers = []
+
+user_numbers.append(int(input("Enter the first number that you want added: ")))
+user_numbers.append(int(input("Now the second number: ")))
+
+user_choice = input("Add more numbers?: ")
+
+while user_choice != "no":
+  user_numbers.append(int(input("Enter the number: ")))
+  user_choice = input("Add more?: ")
+
+print(add(user_numbers)) 
+
+Subtraction
+def sub(user_numbers):
+    return f"The answer is {diff(user_numbers)}"
+
+def diff(numbers):
+    result = numbers[0]
+    for number in numbers[1:]:
+        result -= number
+    return result
+
+user_numbers = []
+
+user_numbers.append(int(input("Enter the first number that you want to subtract: ")))
+user_numbers.append(int(input("Now the second number: ")))
+
+user_choice = input("Subtract more numbers?: ")
+
+while user_choice != "no":
+    user_numbers.append(int(input("Enter the number: ")))
+    user_choice = input("Subtract more?: ")
+
+print(sub(user_numbers)) 
+
+Multiplication
+!pip install numpy
+import numpy as np
+
+def mul(user_numbers):
+    return f"The answer is {np.prod(user_numbers)}"
+
+user_numbers = []
+
+user_numbers.append(int(input("Enter the first number you want multiplied: ")))
+user_numbers.append(int(input("Now the second number: ")))
+
+user_choice = input("Multiply more numbers?: ")
+
+while user_choice !="no":
+  user_numbers.append(int(input("Enter the number: ")))
+  user_choice = input("Multiply more?: ")
+
+print(mul(user_numbers)) 
+
+Division
+def div(user_numbers):
+  result = user_numbers[0]
+  for num in user_numbers[1:]:
+    try:
+      result /= num
+    except ZeroDivisionError:
+      return "Error! Division by zero!"
+  return f"The answer is {result}"
+
+user_numbers = []
+
+user_numbers.append(int(input("Enter the first number you want to divide by: ")))
+user_numbers.append(int(input("Now the second number: ")))
+
+user_choice = input("Divide more numbers? ")
+
+while user_choice != "no":
+  user_numbers.append(int(input("Enter the number: ")))
+  user_choice = input("Divide more? (y/n): ")
+
+print(div(user_numbers))
