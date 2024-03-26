@@ -91,7 +91,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
 </head>
 <body>
-    <div class="calculator" draggable="true" ondragstart="drag(event)">
+    <div class="calculator" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
         <h2>Calculator</h2>
         <input type="text" id="result" readonly>
         <div class="row">
@@ -144,20 +144,19 @@
             except:
                 document["result"].value = "Error"
 
-        def drag(ev):
-            ev.dataTransfer.setData("text", ev.target.id)
+        def dragStart(ev):
+            ev.dataTransfer.setData("text/plain", ev.target.id)
 
-        document.addEventListener("dragstart", drag)
+        def dragOver(ev):
+            ev.preventDefault()
 
         def drop(ev):
             ev.preventDefault()
-            data = ev.dataTransfer.getData("text")
+            data = ev.dataTransfer.getData("text/plain")
             ev.target.appendChild(document.getElementById(data))
 
-        def allowDrop(ev):
-            ev.preventDefault()
-
-        document.addEventListener("dragover", allowDrop)
+        document.addEventListener("dragstart", dragStart)
+        document.addEventListener("dragover", dragOver)
         document.addEventListener("drop", drop)
     </script>
     <script type="text/javascript">
