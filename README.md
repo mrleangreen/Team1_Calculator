@@ -1,7 +1,7 @@
 
 # Python Calculator
 
-# Team 1: Tyler Harry, Devanna Watts, Adrien Engelder, & Jonathan Wynman-Comas
+# Team 2: Tyler Harry, Devanna Watts, Adrien Engelder, & Jonathan Wynman-Comas
 ## Overview
 
 This Python Calculator is a simple command-line application that can perform basic arithmetic operations. It is designed to be user-friendly and easy to extend with additional functionalities.
